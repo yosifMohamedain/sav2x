@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sav2x:schema:bsm:2.0",
+  "title": "Extracted SAE J2735 Basic Safety Message (v2)",
+  "description": "BSM Part I (BSMcoreData) plus the Part II fields the vehicle-side predictor uses, normalized to SI units and the intersection's local frame. On the vehicle, the ego's own records come from its OBU at 10 Hz (the data its BSM is built from); other vehicles' records arrive over the air. In simulation the stream is stored columnar (bsm.npz) with the same field names; `transmitted` marks connected vehicles whose BSMs others can receive.",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "sav2x.bsm/2.0"
+    },
+    "temp_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}$",
+      "description": "BSMcoreData.id (TemporaryID); rotates for privacy."
+    },
+    "msg_cnt": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 127
+    },
+    "sec_mark_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535,
+      "description": "DSecond: ms within the minute. Resolve the minute from t_rx and handle rollover."
+    },
+    "t_obs_ms": {
+      "$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms",
+      "description": "Measurement time reconstructed from secMark."
+    },
+    "t_tx_ms": {
+      "$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms"
+    },
+    "t_rx_ms": {
+      "$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms",
+      "description": "Receive time (field logs)."
+    },
+    "lat": {
+      "type": "number",
+      "description": "1e-7 deg on the wire."
+    },
+    "lon": {
+      "type": "number"
+    },
+    "x_m": {
+      "type": "number"
+    },
+    "y_m": {
+      "type": "number"
+    },
+    "elev_m": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "pos_acc_semi_major_m": {
+      "type": "number",
+      "minimum": 0,
+      "description": "PositionalAccuracy.semiMajor (95%)."
+    },
+    "speed_mps": {
+      "type": "number",
+      "minimum": 0
+    },
+    "heading_deg": {
+      "$ref": "urn:sav2x:schema:common:2.0#/$defs/heading_deg"
+    },
+    "steering_deg": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "accel_long_mps2": {
+      "type": "number"
+    },
+    "accel_lat_mps2": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "yaw_rate_dps": {
+      "type": "number"
+    },
+    "brake_applied": {
+      "type": "boolean",
+      "description": "Any wheel in BrakeSystemStatus.wheelBrakes applied."
+    },
+    "abs_active": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "lights": {
+      "type": "object",
+      "properties": {
+        "left_turn": {
+          "type": "boolean"
+        },
+        "right_turn": {
+          "type": "boolean"
+        },
+        "hazard": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "left_turn",
+        "right_turn"
+      ],
+      "description": "Part II ExteriorLights."
+    },
+    "path_prediction": {
+      "type": "object",
+      "properties": {
+        "radius_m": {
+          "type": "number",
+          "description": "radiusOfCurve (10 cm LSB); 3276.7 = straight."
+        },
+        "confidence_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "radius_m"
+      ]
+    },
+    "path_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dx_m": {
+            "type": "number"
+          },
+          "dy_m": {
+            "type": "number"
+          },
+          "dt_s": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "dx_m",
+          "dy_m",
+          "dt_s"
+        ]
+      },
+      "description": "Part II PathHistory crumbs (optional)."
+    },
+    "length_m": {
+      "type": "number"
+    },
+    "width_m": {
+      "type": "number"
+    },
+    "truth_id": {
+      "type": "string",
+      "description": "SIM ONLY: simulated vehicle identity. Never a model input."
+    },
+    "transmitted": {
+      "type": "boolean",
+      "description": "True if this vehicle broadcasts its BSM (a connected vehicle). Simulation field; field logs contain only transmitted BSMs."
+    }
+  },
+  "required": [
+    "schema",
+    "temp_id",
+    "sec_mark_ms",
+    "t_obs_ms",
+    "x_m",
+    "y_m",
+    "speed_mps",
+    "heading_deg",
+    "brake_applied",
+    "lights",
+    "length_m",
+    "width_m"
+  ]
+}

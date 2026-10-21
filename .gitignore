@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+smoke_out/
+data_out/
+sim_out/

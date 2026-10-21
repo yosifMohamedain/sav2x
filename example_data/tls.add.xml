@@ -1,0 +1,14 @@
+<additional>
+  <tlLogic id="C" type="actuated" programID="sav2x" offset="0">
+    <param key="max-gap" value="3.0"/>
+    <param key="detector-gap" value="25"/>
+    <phase duration="20" state="gGGgsrrrgGGgsrrrrGrG" minDur="7" maxDur="40" name="A_walk"/>
+    <phase duration="12" state="gGGgsrrrgGGgsrrrrrrr" name="A_ped_clear"/>
+    <phase duration="3" state="yyyysrrryyyysrrrrrrr" name="A_yellow"/>
+    <phase duration="1" state="rrrrrrrrrrrrrrrrrrrr" name="A_allred"/>
+    <phase duration="20" state="srrrgGGgsrrrgGGgGrGr" minDur="7" maxDur="40" name="B_walk"/>
+    <phase duration="12" state="srrrgGGgsrrrgGGgrrrr" name="B_ped_clear"/>
+    <phase duration="3" state="srrryyyysrrryyyyrrrr" name="B_yellow"/>
+    <phase duration="1" state="rrrrrrrrrrrrrrrrrrrr" name="B_allred"/>
+  </tlLogic>
+</additional>

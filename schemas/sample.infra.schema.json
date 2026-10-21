@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sav2x:schema:sample.infra:1.0",
+  "title": "SA-V2X training sample: infrastructure-side case",
+  "description": "One scene at decision time t0 as seen by the RSU / edge computer at the intersection. Inputs: every SDSM object the RSU's own perception produced (local, near-zero link latency), BSMs received over the air from connected vehicles (which J3224 excludes from the SDSM, so they must be fused), and SPaT from the controller. Every agent is a prediction target. One JSON object per line in .jsonl.gz.",
+  "type": "object",
+  "allOf": [{"$ref": "urn:sav2x:schema:common:1.0#/$defs/sample_header"}],
+  "properties": {
+    "schema": {"const": "sav2x.sample.infra/1.0"},
+    "case": {"const": "infra"},
+    "receiver": {
+      "type": "object",
+      "properties": {"type": {"const": "rsu"}, "id": {"type": "string"}},
+      "required": ["type", "id"]
+    },
+    "agents": {
+      "type": "array",
+      "items": {"$ref": "urn:sav2x:schema:common:1.0#/$defs/agent"},
+      "minItems": 1,
+      "description": "Vehicles on all four approaches and VRUs near the target crosswalk, capped by distance to the crosswalk."
+    },
+    "signals": {"$ref": "urn:sav2x:schema:common:1.0#/$defs/signals"},
+    "signal_truth": {"$ref": "urn:sav2x:schema:common:1.0#/$defs/signal_truth"},
+    "conflicts": {
+      "type": "array",
+      "items": {"$ref": "urn:sav2x:schema:common:1.0#/$defs/conflict"},
+      "description": "Realized vehicle-pedestrian interval pairs at the target crosswalk within the label horizon. Labels only."
+    }
+  },
+  "required": ["schema", "case", "receiver", "agents", "signals", "conflicts"]
+}

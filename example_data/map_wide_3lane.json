@@ -1,0 +1,1954 @@
+{
+ "schema": "sav2x.map/2.0",
+ "intersection_id": 7,
+ "revision": 1,
+ "source": "sumo",
+ "junction_id": "C",
+ "ref": {
+  "lat": 35.04,
+  "lon": -85.3
+ },
+ "lanes": [
+  {
+   "lane_id": "E_in_0",
+   "edge_id": "E_in",
+   "kind": "sidewalk",
+   "role": "ingress",
+   "approach": "E",
+   "lane_width_m": 2.0,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     300.0,
+     10.6
+    ],
+    [
+     13.6,
+     10.6
+    ]
+   ]
+  },
+  {
+   "lane_id": "E_in_1",
+   "edge_id": "E_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "E",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     300.0,
+     8.0
+    ],
+    [
+     13.6,
+     8.0
+    ]
+   ],
+   "maneuvers": [
+    "straight",
+    "right"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "E_in_1>N_out_1",
+     "egress_lane": "N_out_1",
+     "maneuver": "right",
+     "signal_group": 6
+    },
+    {
+     "connection_id": "E_in_1>W_out_1",
+     "egress_lane": "W_out_1",
+     "maneuver": "straight",
+     "signal_group": 5
+    }
+   ],
+   "stop_line": [
+    13.6,
+    8.0
+   ]
+  },
+  {
+   "lane_id": "E_in_2",
+   "edge_id": "E_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "E",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     300.0,
+     4.8
+    ],
+    [
+     13.6,
+     4.8
+    ]
+   ],
+   "maneuvers": [
+    "straight"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "E_in_2>W_out_2",
+     "egress_lane": "W_out_2",
+     "maneuver": "straight",
+     "signal_group": 5
+    }
+   ],
+   "stop_line": [
+    13.6,
+    4.8
+   ]
+  },
+  {
+   "lane_id": "E_in_3",
+   "edge_id": "E_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "E",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     300.0,
+     1.6
+    ],
+    [
+     13.6,
+     1.6
+    ]
+   ],
+   "maneuvers": [
+    "left",
+    "straight"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "E_in_3>W_out_3",
+     "egress_lane": "W_out_3",
+     "maneuver": "straight",
+     "signal_group": 5
+    },
+    {
+     "connection_id": "E_in_3>S_out_3",
+     "egress_lane": "S_out_3",
+     "maneuver": "left",
+     "signal_group": 4
+    }
+   ],
+   "stop_line": [
+    13.6,
+    1.6
+   ]
+  },
+  {
+   "lane_id": "E_out_0",
+   "edge_id": "E_out",
+   "kind": "sidewalk",
+   "role": "egress",
+   "approach": "E",
+   "lane_width_m": 2.0,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     13.6,
+     -10.6
+    ],
+    [
+     300.0,
+     -10.6
+    ]
+   ]
+  },
+  {
+   "lane_id": "E_out_1",
+   "edge_id": "E_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "E",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     13.6,
+     -8.0
+    ],
+    [
+     300.0,
+     -8.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "E_out_2",
+   "edge_id": "E_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "E",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     13.6,
+     -4.8
+    ],
+    [
+     300.0,
+     -4.8
+    ]
+   ]
+  },
+  {
+   "lane_id": "E_out_3",
+   "edge_id": "E_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "E",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     13.6,
+     -1.6
+    ],
+    [
+     300.0,
+     -1.6
+    ]
+   ]
+  },
+  {
+   "lane_id": "N_in_0",
+   "edge_id": "N_in",
+   "kind": "sidewalk",
+   "role": "ingress",
+   "approach": "N",
+   "lane_width_m": 2.0,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -10.6,
+     300.0
+    ],
+    [
+     -10.6,
+     13.6
+    ]
+   ]
+  },
+  {
+   "lane_id": "N_in_1",
+   "edge_id": "N_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "N",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -8.0,
+     300.0
+    ],
+    [
+     -8.0,
+     13.6
+    ]
+   ],
+   "maneuvers": [
+    "straight",
+    "right"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "N_in_1>W_out_1",
+     "egress_lane": "W_out_1",
+     "maneuver": "right",
+     "signal_group": 3
+    },
+    {
+     "connection_id": "N_in_1>S_out_1",
+     "egress_lane": "S_out_1",
+     "maneuver": "straight",
+     "signal_group": 2
+    }
+   ],
+   "stop_line": [
+    -8.0,
+    13.6
+   ]
+  },
+  {
+   "lane_id": "N_in_2",
+   "edge_id": "N_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "N",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -4.8,
+     300.0
+    ],
+    [
+     -4.8,
+     13.6
+    ]
+   ],
+   "maneuvers": [
+    "straight"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "N_in_2>S_out_2",
+     "egress_lane": "S_out_2",
+     "maneuver": "straight",
+     "signal_group": 2
+    }
+   ],
+   "stop_line": [
+    -4.8,
+    13.6
+   ]
+  },
+  {
+   "lane_id": "N_in_3",
+   "edge_id": "N_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "N",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -1.6,
+     300.0
+    ],
+    [
+     -1.6,
+     13.6
+    ]
+   ],
+   "maneuvers": [
+    "left",
+    "straight"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "N_in_3>S_out_3",
+     "egress_lane": "S_out_3",
+     "maneuver": "straight",
+     "signal_group": 2
+    },
+    {
+     "connection_id": "N_in_3>E_out_3",
+     "egress_lane": "E_out_3",
+     "maneuver": "left",
+     "signal_group": 1
+    }
+   ],
+   "stop_line": [
+    -1.6,
+    13.6
+   ]
+  },
+  {
+   "lane_id": "N_out_0",
+   "edge_id": "N_out",
+   "kind": "sidewalk",
+   "role": "egress",
+   "approach": "N",
+   "lane_width_m": 2.0,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     10.6,
+     13.6
+    ],
+    [
+     10.6,
+     300.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "N_out_1",
+   "edge_id": "N_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "N",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     8.0,
+     13.6
+    ],
+    [
+     8.0,
+     300.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "N_out_2",
+   "edge_id": "N_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "N",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     4.8,
+     13.6
+    ],
+    [
+     4.8,
+     300.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "N_out_3",
+   "edge_id": "N_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "N",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     1.6,
+     13.6
+    ],
+    [
+     1.6,
+     300.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "S_in_0",
+   "edge_id": "S_in",
+   "kind": "sidewalk",
+   "role": "ingress",
+   "approach": "S",
+   "lane_width_m": 2.0,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     10.6,
+     -300.0
+    ],
+    [
+     10.6,
+     -13.6
+    ]
+   ]
+  },
+  {
+   "lane_id": "S_in_1",
+   "edge_id": "S_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "S",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     8.0,
+     -300.0
+    ],
+    [
+     8.0,
+     -13.6
+    ]
+   ],
+   "maneuvers": [
+    "straight",
+    "right"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "S_in_1>E_out_1",
+     "egress_lane": "E_out_1",
+     "maneuver": "right",
+     "signal_group": 9
+    },
+    {
+     "connection_id": "S_in_1>N_out_1",
+     "egress_lane": "N_out_1",
+     "maneuver": "straight",
+     "signal_group": 8
+    }
+   ],
+   "stop_line": [
+    8.0,
+    -13.6
+   ]
+  },
+  {
+   "lane_id": "S_in_2",
+   "edge_id": "S_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "S",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     4.8,
+     -300.0
+    ],
+    [
+     4.8,
+     -13.6
+    ]
+   ],
+   "maneuvers": [
+    "straight"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "S_in_2>N_out_2",
+     "egress_lane": "N_out_2",
+     "maneuver": "straight",
+     "signal_group": 8
+    }
+   ],
+   "stop_line": [
+    4.8,
+    -13.6
+   ]
+  },
+  {
+   "lane_id": "S_in_3",
+   "edge_id": "S_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "S",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     1.6,
+     -300.0
+    ],
+    [
+     1.6,
+     -13.6
+    ]
+   ],
+   "maneuvers": [
+    "left",
+    "straight"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "S_in_3>N_out_3",
+     "egress_lane": "N_out_3",
+     "maneuver": "straight",
+     "signal_group": 8
+    },
+    {
+     "connection_id": "S_in_3>W_out_3",
+     "egress_lane": "W_out_3",
+     "maneuver": "left",
+     "signal_group": 7
+    }
+   ],
+   "stop_line": [
+    1.6,
+    -13.6
+   ]
+  },
+  {
+   "lane_id": "S_out_0",
+   "edge_id": "S_out",
+   "kind": "sidewalk",
+   "role": "egress",
+   "approach": "S",
+   "lane_width_m": 2.0,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -10.6,
+     -13.6
+    ],
+    [
+     -10.6,
+     -300.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "S_out_1",
+   "edge_id": "S_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "S",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -8.0,
+     -13.6
+    ],
+    [
+     -8.0,
+     -300.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "S_out_2",
+   "edge_id": "S_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "S",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -4.8,
+     -13.6
+    ],
+    [
+     -4.8,
+     -300.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "S_out_3",
+   "edge_id": "S_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "S",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -1.6,
+     -13.6
+    ],
+    [
+     -1.6,
+     -300.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "W_in_0",
+   "edge_id": "W_in",
+   "kind": "sidewalk",
+   "role": "ingress",
+   "approach": "W",
+   "lane_width_m": 2.0,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -300.0,
+     -10.6
+    ],
+    [
+     -13.6,
+     -10.6
+    ]
+   ]
+  },
+  {
+   "lane_id": "W_in_1",
+   "edge_id": "W_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "W",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -300.0,
+     -8.0
+    ],
+    [
+     -13.6,
+     -8.0
+    ]
+   ],
+   "maneuvers": [
+    "straight",
+    "right"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "W_in_1>S_out_1",
+     "egress_lane": "S_out_1",
+     "maneuver": "right",
+     "signal_group": 12
+    },
+    {
+     "connection_id": "W_in_1>E_out_1",
+     "egress_lane": "E_out_1",
+     "maneuver": "straight",
+     "signal_group": 11
+    }
+   ],
+   "stop_line": [
+    -13.6,
+    -8.0
+   ]
+  },
+  {
+   "lane_id": "W_in_2",
+   "edge_id": "W_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "W",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -300.0,
+     -4.8
+    ],
+    [
+     -13.6,
+     -4.8
+    ]
+   ],
+   "maneuvers": [
+    "straight"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "W_in_2>E_out_2",
+     "egress_lane": "E_out_2",
+     "maneuver": "straight",
+     "signal_group": 11
+    }
+   ],
+   "stop_line": [
+    -13.6,
+    -4.8
+   ]
+  },
+  {
+   "lane_id": "W_in_3",
+   "edge_id": "W_in",
+   "kind": "vehicle",
+   "role": "ingress",
+   "approach": "W",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -300.0,
+     -1.6
+    ],
+    [
+     -13.6,
+     -1.6
+    ]
+   ],
+   "maneuvers": [
+    "left",
+    "straight"
+   ],
+   "connects_to": [
+    {
+     "connection_id": "W_in_3>E_out_3",
+     "egress_lane": "E_out_3",
+     "maneuver": "straight",
+     "signal_group": 11
+    },
+    {
+     "connection_id": "W_in_3>N_out_3",
+     "egress_lane": "N_out_3",
+     "maneuver": "left",
+     "signal_group": 10
+    }
+   ],
+   "stop_line": [
+    -13.6,
+    -1.6
+   ]
+  },
+  {
+   "lane_id": "W_out_0",
+   "edge_id": "W_out",
+   "kind": "sidewalk",
+   "role": "egress",
+   "approach": "W",
+   "lane_width_m": 2.0,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -13.6,
+     10.6
+    ],
+    [
+     -300.0,
+     10.6
+    ]
+   ]
+  },
+  {
+   "lane_id": "W_out_1",
+   "edge_id": "W_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "W",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -13.6,
+     8.0
+    ],
+    [
+     -300.0,
+     8.0
+    ]
+   ]
+  },
+  {
+   "lane_id": "W_out_2",
+   "edge_id": "W_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "W",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -13.6,
+     4.8
+    ],
+    [
+     -300.0,
+     4.8
+    ]
+   ]
+  },
+  {
+   "lane_id": "W_out_3",
+   "edge_id": "W_out",
+   "kind": "vehicle",
+   "role": "egress",
+   "approach": "W",
+   "lane_width_m": 3.2,
+   "speed_limit_mps": 13.41,
+   "centerline": [
+    [
+     -13.6,
+     1.6
+    ],
+    [
+     -300.0,
+     1.6
+    ]
+   ]
+  }
+ ],
+ "connectors": [
+  {
+   "connection_id": "E_in_1>N_out_1",
+   "ingress_lane": "E_in_1",
+   "egress_lane": "N_out_1",
+   "approach": "E",
+   "maneuver": "right",
+   "signal_group": 6,
+   "centerline": [
+    [
+     13.6,
+     8.0
+    ],
+    [
+     11.15,
+     8.35
+    ],
+    [
+     9.4,
+     9.4
+    ],
+    [
+     9.28,
+     9.6
+    ],
+    [
+     8.35,
+     11.15
+    ],
+    [
+     8.0,
+     13.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "E_in_1>W_out_1",
+   "ingress_lane": "E_in_1",
+   "egress_lane": "W_out_1",
+   "approach": "E",
+   "maneuver": "straight",
+   "signal_group": 5,
+   "centerline": [
+    [
+     13.6,
+     8.0
+    ],
+    [
+     -13.6,
+     8.0
+    ]
+   ]
+  },
+  {
+   "connection_id": "E_in_2>W_out_2",
+   "ingress_lane": "E_in_2",
+   "egress_lane": "W_out_2",
+   "approach": "E",
+   "maneuver": "straight",
+   "signal_group": 5,
+   "centerline": [
+    [
+     13.6,
+     4.8
+    ],
+    [
+     -13.6,
+     4.8
+    ]
+   ]
+  },
+  {
+   "connection_id": "E_in_3>W_out_3",
+   "ingress_lane": "E_in_3",
+   "egress_lane": "W_out_3",
+   "approach": "E",
+   "maneuver": "straight",
+   "signal_group": 5,
+   "centerline": [
+    [
+     13.6,
+     1.6
+    ],
+    [
+     -13.6,
+     1.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "E_in_3>S_out_3",
+   "ingress_lane": "E_in_3",
+   "egress_lane": "S_out_3",
+   "approach": "E",
+   "maneuver": "left",
+   "signal_group": 4,
+   "centerline": [
+    [
+     13.6,
+     1.6
+    ],
+    [
+     8.64,
+     0.89
+    ],
+    [
+     6.95,
+     0.65
+    ],
+    [
+     2.2,
+     -2.2
+    ],
+    [
+     -0.65,
+     -6.95
+    ],
+    [
+     -1.6,
+     -13.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "N_in_1>W_out_1",
+   "ingress_lane": "N_in_1",
+   "egress_lane": "W_out_1",
+   "approach": "N",
+   "maneuver": "right",
+   "signal_group": 3,
+   "centerline": [
+    [
+     -8.0,
+     13.6
+    ],
+    [
+     -8.35,
+     11.15
+    ],
+    [
+     -9.4,
+     9.4
+    ],
+    [
+     -9.6,
+     9.28
+    ],
+    [
+     -11.15,
+     8.35
+    ],
+    [
+     -13.6,
+     8.0
+    ]
+   ]
+  },
+  {
+   "connection_id": "N_in_1>S_out_1",
+   "ingress_lane": "N_in_1",
+   "egress_lane": "S_out_1",
+   "approach": "N",
+   "maneuver": "straight",
+   "signal_group": 2,
+   "centerline": [
+    [
+     -8.0,
+     13.6
+    ],
+    [
+     -8.0,
+     -13.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "N_in_2>S_out_2",
+   "ingress_lane": "N_in_2",
+   "egress_lane": "S_out_2",
+   "approach": "N",
+   "maneuver": "straight",
+   "signal_group": 2,
+   "centerline": [
+    [
+     -4.8,
+     13.6
+    ],
+    [
+     -4.8,
+     -13.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "N_in_3>S_out_3",
+   "ingress_lane": "N_in_3",
+   "egress_lane": "S_out_3",
+   "approach": "N",
+   "maneuver": "straight",
+   "signal_group": 2,
+   "centerline": [
+    [
+     -1.6,
+     13.6
+    ],
+    [
+     -1.6,
+     -13.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "N_in_3>E_out_3",
+   "ingress_lane": "N_in_3",
+   "egress_lane": "E_out_3",
+   "approach": "N",
+   "maneuver": "left",
+   "signal_group": 1,
+   "centerline": [
+    [
+     -1.6,
+     13.6
+    ],
+    [
+     -0.89,
+     8.64
+    ],
+    [
+     -0.65,
+     6.95
+    ],
+    [
+     2.2,
+     2.2
+    ],
+    [
+     6.95,
+     -0.65
+    ],
+    [
+     13.6,
+     -1.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "S_in_1>E_out_1",
+   "ingress_lane": "S_in_1",
+   "egress_lane": "E_out_1",
+   "approach": "S",
+   "maneuver": "right",
+   "signal_group": 9,
+   "centerline": [
+    [
+     8.0,
+     -13.6
+    ],
+    [
+     8.35,
+     -11.15
+    ],
+    [
+     9.4,
+     -9.4
+    ],
+    [
+     9.6,
+     -9.28
+    ],
+    [
+     11.15,
+     -8.35
+    ],
+    [
+     13.6,
+     -8.0
+    ]
+   ]
+  },
+  {
+   "connection_id": "S_in_1>N_out_1",
+   "ingress_lane": "S_in_1",
+   "egress_lane": "N_out_1",
+   "approach": "S",
+   "maneuver": "straight",
+   "signal_group": 8,
+   "centerline": [
+    [
+     8.0,
+     -13.6
+    ],
+    [
+     8.0,
+     13.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "S_in_2>N_out_2",
+   "ingress_lane": "S_in_2",
+   "egress_lane": "N_out_2",
+   "approach": "S",
+   "maneuver": "straight",
+   "signal_group": 8,
+   "centerline": [
+    [
+     4.8,
+     -13.6
+    ],
+    [
+     4.8,
+     13.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "S_in_3>N_out_3",
+   "ingress_lane": "S_in_3",
+   "egress_lane": "N_out_3",
+   "approach": "S",
+   "maneuver": "straight",
+   "signal_group": 8,
+   "centerline": [
+    [
+     1.6,
+     -13.6
+    ],
+    [
+     1.6,
+     13.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "S_in_3>W_out_3",
+   "ingress_lane": "S_in_3",
+   "egress_lane": "W_out_3",
+   "approach": "S",
+   "maneuver": "left",
+   "signal_group": 7,
+   "centerline": [
+    [
+     1.6,
+     -13.6
+    ],
+    [
+     0.89,
+     -8.64
+    ],
+    [
+     0.65,
+     -6.95
+    ],
+    [
+     -2.2,
+     -2.2
+    ],
+    [
+     -6.95,
+     0.65
+    ],
+    [
+     -13.6,
+     1.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "W_in_1>S_out_1",
+   "ingress_lane": "W_in_1",
+   "egress_lane": "S_out_1",
+   "approach": "W",
+   "maneuver": "right",
+   "signal_group": 12,
+   "centerline": [
+    [
+     -13.6,
+     -8.0
+    ],
+    [
+     -11.15,
+     -8.35
+    ],
+    [
+     -9.4,
+     -9.4
+    ],
+    [
+     -9.28,
+     -9.6
+    ],
+    [
+     -8.35,
+     -11.15
+    ],
+    [
+     -8.0,
+     -13.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "W_in_1>E_out_1",
+   "ingress_lane": "W_in_1",
+   "egress_lane": "E_out_1",
+   "approach": "W",
+   "maneuver": "straight",
+   "signal_group": 11,
+   "centerline": [
+    [
+     -13.6,
+     -8.0
+    ],
+    [
+     13.6,
+     -8.0
+    ]
+   ]
+  },
+  {
+   "connection_id": "W_in_2>E_out_2",
+   "ingress_lane": "W_in_2",
+   "egress_lane": "E_out_2",
+   "approach": "W",
+   "maneuver": "straight",
+   "signal_group": 11,
+   "centerline": [
+    [
+     -13.6,
+     -4.8
+    ],
+    [
+     13.6,
+     -4.8
+    ]
+   ]
+  },
+  {
+   "connection_id": "W_in_3>E_out_3",
+   "ingress_lane": "W_in_3",
+   "egress_lane": "E_out_3",
+   "approach": "W",
+   "maneuver": "straight",
+   "signal_group": 11,
+   "centerline": [
+    [
+     -13.6,
+     -1.6
+    ],
+    [
+     13.6,
+     -1.6
+    ]
+   ]
+  },
+  {
+   "connection_id": "W_in_3>N_out_3",
+   "ingress_lane": "W_in_3",
+   "egress_lane": "N_out_3",
+   "approach": "W",
+   "maneuver": "left",
+   "signal_group": 10,
+   "centerline": [
+    [
+     -13.6,
+     -1.6
+    ],
+    [
+     -8.64,
+     -0.89
+    ],
+    [
+     -6.95,
+     -0.65
+    ],
+    [
+     -2.2,
+     2.2
+    ],
+    [
+     0.65,
+     6.95
+    ],
+    [
+     1.6,
+     13.6
+    ]
+   ]
+  }
+ ],
+ "signal_groups": [
+  {
+   "signal_group": 1,
+   "kind": "vehicle",
+   "movement_name": "N_left",
+   "link_indices": [
+    4
+   ],
+   "state_sequence": "ggyrrrrr"
+  },
+  {
+   "signal_group": 2,
+   "kind": "vehicle",
+   "movement_name": "N_straight",
+   "link_indices": [
+    1,
+    2,
+    3
+   ],
+   "state_sequence": "GGyrrrrr"
+  },
+  {
+   "signal_group": 3,
+   "kind": "vehicle",
+   "movement_name": "N_right",
+   "link_indices": [
+    0
+   ],
+   "state_sequence": "ggyrsssr"
+  },
+  {
+   "signal_group": 4,
+   "kind": "vehicle",
+   "movement_name": "E_left",
+   "link_indices": [
+    9
+   ],
+   "state_sequence": "rrrrggyr"
+  },
+  {
+   "signal_group": 5,
+   "kind": "vehicle",
+   "movement_name": "E_straight",
+   "link_indices": [
+    6,
+    7,
+    8
+   ],
+   "state_sequence": "rrrrGGyr"
+  },
+  {
+   "signal_group": 6,
+   "kind": "vehicle",
+   "movement_name": "E_right",
+   "link_indices": [
+    5
+   ],
+   "state_sequence": "sssrggyr"
+  },
+  {
+   "signal_group": 7,
+   "kind": "vehicle",
+   "movement_name": "S_left",
+   "link_indices": [
+    14
+   ],
+   "state_sequence": "ggyrrrrr"
+  },
+  {
+   "signal_group": 8,
+   "kind": "vehicle",
+   "movement_name": "S_straight",
+   "link_indices": [
+    11,
+    12,
+    13
+   ],
+   "state_sequence": "GGyrrrrr"
+  },
+  {
+   "signal_group": 9,
+   "kind": "vehicle",
+   "movement_name": "S_right",
+   "link_indices": [
+    10
+   ],
+   "state_sequence": "ggyrsssr"
+  },
+  {
+   "signal_group": 10,
+   "kind": "vehicle",
+   "movement_name": "W_left",
+   "link_indices": [
+    19
+   ],
+   "state_sequence": "rrrrggyr"
+  },
+  {
+   "signal_group": 11,
+   "kind": "vehicle",
+   "movement_name": "W_straight",
+   "link_indices": [
+    16,
+    17,
+    18
+   ],
+   "state_sequence": "rrrrGGyr"
+  },
+  {
+   "signal_group": 12,
+   "kind": "vehicle",
+   "movement_name": "W_right",
+   "link_indices": [
+    15
+   ],
+   "state_sequence": "sssrggyr"
+  },
+  {
+   "signal_group": 21,
+   "kind": "pedestrian",
+   "movement_name": "ped_N",
+   "link_indices": [
+    20
+   ],
+   "state_sequence": "rrrrGrrr"
+  },
+  {
+   "signal_group": 22,
+   "kind": "pedestrian",
+   "movement_name": "ped_E",
+   "link_indices": [
+    21
+   ],
+   "state_sequence": "Grrrrrrr"
+  },
+  {
+   "signal_group": 23,
+   "kind": "pedestrian",
+   "movement_name": "ped_S",
+   "link_indices": [
+    22
+   ],
+   "state_sequence": "rrrrGrrr"
+  },
+  {
+   "signal_group": 24,
+   "kind": "pedestrian",
+   "movement_name": "ped_W",
+   "link_indices": [
+    23
+   ],
+   "state_sequence": "Grrrrrrr"
+  }
+ ],
+ "phase_names": [
+  "A_walk",
+  "A_ped_clear",
+  "A_yellow",
+  "A_allred",
+  "B_walk",
+  "B_ped_clear",
+  "B_yellow",
+  "B_allred"
+ ],
+ "crosswalks": [
+  {
+   "crosswalk_id": ":C_c0",
+   "lane_id": ":C_c0_0",
+   "leg": "N",
+   "signal_group": 21,
+   "crosses_edges": [
+    "N_out",
+    "N_in"
+   ],
+   "length_m": 19.2,
+   "width_m": 4.0,
+   "centerline": [
+    [
+     9.6,
+     11.6
+    ],
+    [
+     -9.6,
+     11.6
+    ]
+   ],
+   "polygon": [
+    [
+     -9.6,
+     9.6
+    ],
+    [
+     -9.6,
+     13.6
+    ],
+    [
+     9.6,
+     13.6
+    ],
+    [
+     9.6,
+     9.6
+    ]
+   ],
+   "is_target": true
+  },
+  {
+   "crosswalk_id": ":C_c1",
+   "lane_id": ":C_c1_0",
+   "leg": "E",
+   "signal_group": 22,
+   "crosses_edges": [
+    "E_out",
+    "E_in"
+   ],
+   "length_m": 19.2,
+   "width_m": 4.0,
+   "centerline": [
+    [
+     11.6,
+     -9.6
+    ],
+    [
+     11.6,
+     9.6
+    ]
+   ],
+   "polygon": [
+    [
+     9.6,
+     9.6
+    ],
+    [
+     13.6,
+     9.6
+    ],
+    [
+     13.6,
+     -9.6
+    ],
+    [
+     9.6,
+     -9.6
+    ]
+   ],
+   "is_target": false
+  },
+  {
+   "crosswalk_id": ":C_c2",
+   "lane_id": ":C_c2_0",
+   "leg": "S",
+   "signal_group": 23,
+   "crosses_edges": [
+    "S_out",
+    "S_in"
+   ],
+   "length_m": 19.2,
+   "width_m": 4.0,
+   "centerline": [
+    [
+     -9.6,
+     -11.6
+    ],
+    [
+     9.6,
+     -11.6
+    ]
+   ],
+   "polygon": [
+    [
+     9.6,
+     -9.6
+    ],
+    [
+     9.6,
+     -13.6
+    ],
+    [
+     -9.6,
+     -13.6
+    ],
+    [
+     -9.6,
+     -9.6
+    ]
+   ],
+   "is_target": false
+  },
+  {
+   "crosswalk_id": ":C_c3",
+   "lane_id": ":C_c3_0",
+   "leg": "W",
+   "signal_group": 24,
+   "crosses_edges": [
+    "W_out",
+    "W_in"
+   ],
+   "length_m": 19.2,
+   "width_m": 4.0,
+   "centerline": [
+    [
+     -11.6,
+     9.6
+    ],
+    [
+     -11.6,
+     -9.6
+    ]
+   ],
+   "polygon": [
+    [
+     -9.6,
+     -9.6
+    ],
+    [
+     -13.6,
+     -9.6
+    ],
+    [
+     -13.6,
+     9.6
+    ],
+    [
+     -9.6,
+     9.6
+    ]
+   ],
+   "is_target": false
+  }
+ ],
+ "target_crosswalk": {
+  "crosswalk_id": ":C_c0",
+  "signal_group": 21,
+  "length_m": 19.2,
+  "inbound_end": [
+   -9.6,
+   11.6
+  ],
+  "outbound_end": [
+   9.6,
+   11.6
+  ],
+  "zones": [
+   {
+    "zone": "inbound",
+    "polygon": [
+     [
+      -9.6,
+      13.6
+     ],
+     [
+      0.0,
+      13.6
+     ],
+     [
+      0.0,
+      9.6
+     ],
+     [
+      -9.6,
+      9.6
+     ]
+    ]
+   },
+   {
+    "zone": "outbound",
+    "polygon": [
+     [
+      0.0,
+      13.6
+     ],
+     [
+      9.6,
+      13.6
+     ],
+     [
+      9.6,
+      9.6
+     ],
+     [
+      0.0,
+      9.6
+     ]
+    ]
+   }
+  ],
+  "presence_zones": [
+   {
+    "zone": "wait_in",
+    "polygon": [
+     [
+      -13.1,
+      14.35
+     ],
+     [
+      -9.8,
+      14.35
+     ],
+     [
+      -9.8,
+      8.85
+     ],
+     [
+      -13.1,
+      8.85
+     ]
+    ]
+   },
+   {
+    "zone": "cw_1",
+    "polygon": [
+     [
+      -9.6,
+      13.6
+     ],
+     [
+      -4.8,
+      13.6
+     ],
+     [
+      -4.8,
+      9.6
+     ],
+     [
+      -9.6,
+      9.6
+     ]
+    ]
+   },
+   {
+    "zone": "cw_2",
+    "polygon": [
+     [
+      -4.8,
+      13.6
+     ],
+     [
+      0.0,
+      13.6
+     ],
+     [
+      0.0,
+      9.6
+     ],
+     [
+      -4.8,
+      9.6
+     ]
+    ]
+   },
+   {
+    "zone": "cw_3",
+    "polygon": [
+     [
+      0.0,
+      13.6
+     ],
+     [
+      4.8,
+      13.6
+     ],
+     [
+      4.8,
+      9.6
+     ],
+     [
+      0.0,
+      9.6
+     ]
+    ]
+   },
+   {
+    "zone": "cw_4",
+    "polygon": [
+     [
+      4.8,
+      13.6
+     ],
+     [
+      9.6,
+      13.6
+     ],
+     [
+      9.6,
+      9.6
+     ],
+     [
+      4.8,
+      9.6
+     ]
+    ]
+   },
+   {
+    "zone": "wait_out",
+    "polygon": [
+     [
+      9.8,
+      14.35
+     ],
+     [
+      13.1,
+      14.35
+     ],
+     [
+      13.1,
+      8.85
+     ],
+     [
+      9.8,
+      8.85
+     ]
+    ]
+   }
+  ],
+  "conflicting_movements": [
+   {
+    "connection_id": "E_in_1>N_out_1",
+    "approach": "E",
+    "maneuver": "right",
+    "signal_group": 6,
+    "zones": [
+     "outbound"
+    ]
+   },
+   {
+    "connection_id": "N_in_1>W_out_1",
+    "approach": "N",
+    "maneuver": "right",
+    "signal_group": 3,
+    "zones": [
+     "inbound"
+    ]
+   },
+   {
+    "connection_id": "N_in_1>S_out_1",
+    "approach": "N",
+    "maneuver": "straight",
+    "signal_group": 2,
+    "zones": [
+     "inbound"
+    ]
+   },
+   {
+    "connection_id": "N_in_2>S_out_2",
+    "approach": "N",
+    "maneuver": "straight",
+    "signal_group": 2,
+    "zones": [
+     "inbound"
+    ]
+   },
+   {
+    "connection_id": "N_in_3>S_out_3",
+    "approach": "N",
+    "maneuver": "straight",
+    "signal_group": 2,
+    "zones": [
+     "inbound"
+    ]
+   },
+   {
+    "connection_id": "N_in_3>E_out_3",
+    "approach": "N",
+    "maneuver": "left",
+    "signal_group": 1,
+    "zones": [
+     "inbound"
+    ]
+   },
+   {
+    "connection_id": "S_in_1>N_out_1",
+    "approach": "S",
+    "maneuver": "straight",
+    "signal_group": 8,
+    "zones": [
+     "outbound"
+    ]
+   },
+   {
+    "connection_id": "S_in_2>N_out_2",
+    "approach": "S",
+    "maneuver": "straight",
+    "signal_group": 8,
+    "zones": [
+     "outbound"
+    ]
+   },
+   {
+    "connection_id": "S_in_3>N_out_3",
+    "approach": "S",
+    "maneuver": "straight",
+    "signal_group": 8,
+    "zones": [
+     "outbound"
+    ]
+   },
+   {
+    "connection_id": "W_in_3>N_out_3",
+    "approach": "W",
+    "maneuver": "left",
+    "signal_group": 10,
+    "zones": [
+     "outbound"
+    ]
+   }
+  ]
+ }
+}

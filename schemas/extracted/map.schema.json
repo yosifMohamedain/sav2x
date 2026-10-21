@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sav2x:schema:map:2.0",
+  "title": "Intersection MAP (from J2735 MAP or the SUMO twin), v2",
+  "description": "Static geometry, the lane-to-signal binding, and the target crosswalk's conflict and presence zones. In the field, lanes, connections and signal groups come from the RSU's J2735 MAP (NodeXY offsets to meters, connectsTo with signalGroup); connector centerlines, crosswalk halves and presence zones are derived once per intersection. The sample builder uses it to build candidate routes, pick the signal groups to read from SPaT, and count SDSM pedestrians per zone.",
+  "type": "object",
+  "$defs": {
+    "xy": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+    "polyline": {"type": "array", "items": {"$ref": "#/$defs/xy"}},
+    "polygon": {"type": "array", "items": {"$ref": "#/$defs/xy"}, "minItems": 3},
+    "approach": {"enum": ["N", "E", "S", "W"]},
+    "maneuver": {"enum": ["left", "straight", "right", "uturn"]}
+  },
+  "properties": {
+    "schema": {"const": "sav2x.map/2.0"},
+    "intersection_id": {"type": "integer"},
+    "revision": {"type": "integer"},
+    "source": {"enum": ["j2735", "sumo"]},
+    "junction_id": {"type": "string"},
+    "ref": {"type": "object", "properties": {"lat": {"type": "number"}, "lon": {"type": "number"}}, "required": ["lat", "lon"]},
+    "lanes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lane_id": {"type": "string"},
+          "edge_id": {"type": "string"},
+          "kind": {"enum": ["vehicle", "sidewalk", "bike"]},
+          "role": {"enum": ["ingress", "egress"]},
+          "approach": {"$ref": "#/$defs/approach"},
+          "lane_width_m": {"type": "number"},
+          "speed_limit_mps": {"type": "number"},
+          "centerline": {"$ref": "#/$defs/polyline", "description": "Local ENU meters, in the direction of travel; for ingress lanes the last point is the stop line."},
+          "maneuvers": {"type": "array", "items": {"$ref": "#/$defs/maneuver"}},
+          "connects_to": {"type": "array", "items": {"type": "object",
+            "properties": {"connection_id": {"type": "string"}, "egress_lane": {"type": "string"},
+                           "maneuver": {"$ref": "#/$defs/maneuver"}, "signal_group": {"type": "integer"}},
+            "required": ["connection_id", "egress_lane", "maneuver", "signal_group"]}},
+          "stop_line": {"$ref": "#/$defs/xy"}
+        },
+        "required": ["lane_id", "kind", "role", "approach", "centerline"]
+      }
+    },
+    "connectors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "connection_id": {"type": "string"}, "ingress_lane": {"type": "string"}, "egress_lane": {"type": "string"},
+          "approach": {"$ref": "#/$defs/approach"}, "maneuver": {"$ref": "#/$defs/maneuver"},
+          "signal_group": {"type": "integer"},
+          "centerline": {"$ref": "#/$defs/polyline", "description": "Path through the box. J2735 MAP does not carry it; build it from the lane ends (e.g. a cubic curve) in the field."}
+        },
+        "required": ["connection_id", "ingress_lane", "egress_lane", "approach", "maneuver", "signal_group", "centerline"]
+      }
+    },
+    "signal_groups": {
+      "type": "array",
+      "items": {"type": "object",
+                "properties": {"signal_group": {"type": "integer"}, "kind": {"enum": ["vehicle", "pedestrian"]},
+                               "movement_name": {"type": "string"}, "link_indices": {"type": "array", "items": {"type": "integer"}},
+                               "state_sequence": {"type": "string"}},
+                "required": ["signal_group", "kind"]}
+    },
+    "crosswalks": {
+      "type": "array",
+      "items": {"type": "object",
+                "properties": {"crosswalk_id": {"type": "string"}, "leg": {"$ref": "#/$defs/approach"},
+                               "signal_group": {"type": "integer"}, "length_m": {"type": "number"}, "width_m": {"type": "number"},
+                               "centerline": {"$ref": "#/$defs/polyline"}, "polygon": {"$ref": "#/$defs/polygon"},
+                               "is_target": {"type": "boolean"}},
+                "required": ["crosswalk_id", "leg", "signal_group", "polygon", "is_target"]}
+    },
+    "target_crosswalk": {
+      "type": "object",
+      "properties": {
+        "crosswalk_id": {"type": "string"},
+        "signal_group": {"type": "integer", "description": "Pedestrian signal group of the target crosswalk."},
+        "length_m": {"type": "number"},
+        "inbound_end": {"$ref": "#/$defs/xy", "description": "Crosswalk end at the curb next to the inbound lanes."},
+        "outbound_end": {"$ref": "#/$defs/xy"},
+        "zones": {"type": "array", "minItems": 2, "maxItems": 2,
+                  "items": {"type": "object", "properties": {"zone": {"enum": ["inbound", "outbound"]},
+                                                             "polygon": {"$ref": "#/$defs/polygon"}},
+                            "required": ["zone", "polygon"]},
+                  "description": "Crosswalk halves over the inbound and outbound lanes; conflicts are scored per half."},
+        "presence_zones": {"type": "array", "minItems": 1,
+                           "items": {"type": "object", "properties": {"zone": {"type": "string"},
+                                                                      "polygon": {"$ref": "#/$defs/polygon"}},
+                                     "required": ["zone", "polygon"]},
+                           "description": "Zones in which SDSM pedestrians are counted, ordered from the inbound curb to the outbound curb: wait_in, cw_1..cw_n, wait_out."},
+        "conflicting_movements": {"type": "array",
+                                  "items": {"type": "object",
+                                            "properties": {"connection_id": {"type": "string"}, "approach": {"$ref": "#/$defs/approach"},
+                                                           "maneuver": {"$ref": "#/$defs/maneuver"}, "signal_group": {"type": "integer"},
+                                                           "zones": {"type": "array", "items": {"enum": ["inbound", "outbound"]}}},
+                                            "required": ["connection_id", "approach", "maneuver", "signal_group", "zones"]}}
+      },
+      "required": ["crosswalk_id", "signal_group", "length_m", "zones", "presence_zones", "conflicting_movements"]
+    }
+  },
+  "required": ["schema", "intersection_id", "revision", "lanes", "connectors", "signal_groups", "crosswalks", "target_crosswalk"]
+}

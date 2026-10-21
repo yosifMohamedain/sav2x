@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sav2x:schema:spat:2.0",
+  "title": "Extracted SAE J2735 SPaT (one IntersectionState)",
+  "description": "Signal phase and timing per signal group, with TimeMark values decoded to absolute epoch ms. TimeMark is tenths of a second after the top of the UTC hour (36001 = unknown); decode with the receive time's hour and correct for rollover. Keep the raw TimeMark values for auditing.",
+  "type": "object",
+  "properties": {
+    "schema": {"const": "sav2x.spat/2.0"},
+    "intersection_id": {"type": "integer"},
+    "rsu_id": {"type": "string"},
+    "revision": {"type": "integer", "description": "Must match the MAP revision."},
+    "t_gen_ms": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms", "description": "From moy + timeStamp."},
+    "t_rx_ms": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms"},
+    "moy": {"type": "integer", "minimum": 0, "maximum": 527040},
+    "timestamp_ms_in_minute": {"type": "integer", "minimum": 0, "maximum": 65535},
+    "status": {
+      "type": "array",
+      "items": {"enum": ["manualControlIsEnabled", "stopTimeIsActivated", "failureFlash", "preemptIsActive",
+                         "signalPriorityIsActive", "fixedTimeOperation", "trafficDependentOperation",
+                         "standbyOperation", "failureMode", "off", "recentMAPmessageUpdate",
+                         "recentChangeInMAPassignedLanesIDsUsed", "noValidMAPisAvailableAtThisTime",
+                         "noValidSPATisAvailableAtThisTime"]},
+      "description": "IntersectionStatusObject bits that are set. preemptIsActive matters: timing during EVP preemption is not normal."
+    },
+    "movements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "signal_group": {"type": "integer", "minimum": 1, "maximum": 255},
+          "kind": {"enum": ["vehicle", "pedestrian"], "description": "From the MAP: does this group control vehicle connections or a crosswalk."},
+          "events": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "event_state": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/movement_phase_state"},
+                "start_ms": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms"},
+                "min_end_ms": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms"},
+                "max_end_ms": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms"},
+                "likely_end_ms": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms"},
+                "confidence_code": {"type": "integer", "minimum": 0, "maximum": 15, "description": "TimeIntervalConfidence code for likelyTime."},
+                "confidence_p": {"type": "number", "minimum": 0, "maximum": 1, "description": "confidence_code decoded with the J2735 table."},
+                "next_ms": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms"},
+                "timing_valid": {"type": "boolean"},
+                "raw": {"type": "object", "description": "Raw TimeMark integers as received."}
+              },
+              "required": ["event_state", "min_end_ms"]
+            },
+            "description": "MovementEventList; the first entry is the current state."
+          }
+        },
+        "required": ["signal_group", "events"]
+      }
+    },
+    "maneuver_assist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "connection_id": {"type": "string"},
+          "signal_group": {"type": "integer"},
+          "queue_length_m": {"type": ["number", "null"]},
+          "ped_bicycle_detect": {"type": ["boolean", "null"]}
+        },
+        "required": ["connection_id"]
+      },
+      "description": "ConnectionManeuverAssist entries (optional in J2735)."
+    },
+    "truth": {"type": "object", "description": "SIM ONLY: controller internals."}
+  },
+  "required": ["schema", "intersection_id", "t_gen_ms", "movements"]
+}

@@ -1,0 +1,278 @@
+{
+ "catalog": "configs/scenarios.json",
+ "runs": [
+  {
+   "scenario": "base",
+   "seed": 1,
+   "split": "train",
+   "samples": "data_out/samples/base_s1.jsonl.gz",
+   "n": 16674
+  },
+  {
+   "scenario": "base",
+   "seed": 2,
+   "split": "train",
+   "samples": "data_out/samples/base_s2.jsonl.gz",
+   "n": 16247
+  },
+  {
+   "scenario": "base",
+   "seed": 3,
+   "split": "train",
+   "samples": "data_out/samples/base_s3.jsonl.gz",
+   "n": 18979
+  },
+  {
+   "scenario": "base",
+   "seed": 4,
+   "split": "val",
+   "samples": "data_out/samples/base_s4.jsonl.gz",
+   "n": 13427
+  },
+  {
+   "scenario": "base",
+   "seed": 5,
+   "split": "test",
+   "samples": "data_out/samples/base_s5.jsonl.gz",
+   "n": 22986
+  },
+  {
+   "scenario": "peak",
+   "seed": 1,
+   "split": "train",
+   "samples": "data_out/samples/peak_s1.jsonl.gz",
+   "n": 30656
+  },
+  {
+   "scenario": "peak",
+   "seed": 2,
+   "split": "train",
+   "samples": "data_out/samples/peak_s2.jsonl.gz",
+   "n": 33566
+  },
+  {
+   "scenario": "peak",
+   "seed": 3,
+   "split": "train",
+   "samples": "data_out/samples/peak_s3.jsonl.gz",
+   "n": 34544
+  },
+  {
+   "scenario": "peak",
+   "seed": 4,
+   "split": "val",
+   "samples": "data_out/samples/peak_s4.jsonl.gz",
+   "n": 24916
+  },
+  {
+   "scenario": "peak",
+   "seed": 5,
+   "split": "test",
+   "samples": "data_out/samples/peak_s5.jsonl.gz",
+   "n": 51899
+  },
+  {
+   "scenario": "offpeak",
+   "seed": 1,
+   "split": "train",
+   "samples": "data_out/samples/offpeak_s1.jsonl.gz",
+   "n": 5958
+  },
+  {
+   "scenario": "offpeak",
+   "seed": 2,
+   "split": "train",
+   "samples": "data_out/samples/offpeak_s2.jsonl.gz",
+   "n": 7625
+  },
+  {
+   "scenario": "offpeak",
+   "seed": 3,
+   "split": "train",
+   "samples": "data_out/samples/offpeak_s3.jsonl.gz",
+   "n": 7433
+  },
+  {
+   "scenario": "offpeak",
+   "seed": 4,
+   "split": "val",
+   "samples": "data_out/samples/offpeak_s4.jsonl.gz",
+   "n": 6314
+  },
+  {
+   "scenario": "offpeak",
+   "seed": 5,
+   "split": "test",
+   "samples": "data_out/samples/offpeak_s5.jsonl.gz",
+   "n": 10384
+  },
+  {
+   "scenario": "ped_heavy",
+   "seed": 1,
+   "split": "train",
+   "samples": "data_out/samples/ped_heavy_s1.jsonl.gz",
+   "n": 17493
+  },
+  {
+   "scenario": "ped_heavy",
+   "seed": 2,
+   "split": "train",
+   "samples": "data_out/samples/ped_heavy_s2.jsonl.gz",
+   "n": 17974
+  },
+  {
+   "scenario": "ped_heavy",
+   "seed": 3,
+   "split": "train",
+   "samples": "data_out/samples/ped_heavy_s3.jsonl.gz",
+   "n": 21528
+  },
+  {
+   "scenario": "ped_heavy",
+   "seed": 4,
+   "split": "val",
+   "samples": "data_out/samples/ped_heavy_s4.jsonl.gz",
+   "n": 14425
+  },
+  {
+   "scenario": "ped_heavy",
+   "seed": 5,
+   "split": "test",
+   "samples": "data_out/samples/ped_heavy_s5.jsonl.gz",
+   "n": 30109
+  },
+  {
+   "scenario": "turn_heavy",
+   "seed": 1,
+   "split": "train",
+   "samples": "data_out/samples/turn_heavy_s1.jsonl.gz",
+   "n": 16269
+  },
+  {
+   "scenario": "turn_heavy",
+   "seed": 2,
+   "split": "train",
+   "samples": "data_out/samples/turn_heavy_s2.jsonl.gz",
+   "n": 17507
+  },
+  {
+   "scenario": "turn_heavy",
+   "seed": 3,
+   "split": "train",
+   "samples": "data_out/samples/turn_heavy_s3.jsonl.gz",
+   "n": 18323
+  },
+  {
+   "scenario": "turn_heavy",
+   "seed": 4,
+   "split": "val",
+   "samples": "data_out/samples/turn_heavy_s4.jsonl.gz",
+   "n": 14135
+  },
+  {
+   "scenario": "turn_heavy",
+   "seed": 5,
+   "split": "test",
+   "samples": "data_out/samples/turn_heavy_s5.jsonl.gz",
+   "n": 25603
+  },
+  {
+   "scenario": "aggressive",
+   "seed": 1,
+   "split": "train",
+   "samples": "data_out/samples/aggressive_s1.jsonl.gz",
+   "n": 15800
+  },
+  {
+   "scenario": "aggressive",
+   "seed": 2,
+   "split": "train",
+   "samples": "data_out/samples/aggressive_s2.jsonl.gz",
+   "n": 15741
+  },
+  {
+   "scenario": "aggressive",
+   "seed": 3,
+   "split": "train",
+   "samples": "data_out/samples/aggressive_s3.jsonl.gz",
+   "n": 18647
+  },
+  {
+   "scenario": "aggressive",
+   "seed": 4,
+   "split": "val",
+   "samples": "data_out/samples/aggressive_s4.jsonl.gz",
+   "n": 13110
+  },
+  {
+   "scenario": "aggressive",
+   "seed": 5,
+   "split": "test",
+   "samples": "data_out/samples/aggressive_s5.jsonl.gz",
+   "n": 23006
+  },
+  {
+   "scenario": "short_green",
+   "seed": 1,
+   "split": "train",
+   "samples": "data_out/samples/short_green_s1.jsonl.gz",
+   "n": 13682
+  },
+  {
+   "scenario": "short_green",
+   "seed": 2,
+   "split": "train",
+   "samples": "data_out/samples/short_green_s2.jsonl.gz",
+   "n": 16549
+  },
+  {
+   "scenario": "short_green",
+   "seed": 3,
+   "split": "train",
+   "samples": "data_out/samples/short_green_s3.jsonl.gz",
+   "n": 16171
+  },
+  {
+   "scenario": "short_green",
+   "seed": 4,
+   "split": "val",
+   "samples": "data_out/samples/short_green_s4.jsonl.gz",
+   "n": 12063
+  },
+  {
+   "scenario": "short_green",
+   "seed": 5,
+   "split": "test",
+   "samples": "data_out/samples/short_green_s5.jsonl.gz",
+   "n": 19754
+  },
+  {
+   "scenario": "slow_walkers",
+   "seed": 5,
+   "split": "heldout",
+   "samples": "data_out/samples/slow_walkers_s5.jsonl.gz",
+   "n": 28411
+  },
+  {
+   "scenario": "slow_walkers",
+   "seed": 6,
+   "split": "heldout",
+   "samples": "data_out/samples/slow_walkers_s6.jsonl.gz",
+   "n": 19966
+  },
+  {
+   "scenario": "wide_3lane",
+   "seed": 5,
+   "split": "heldout",
+   "samples": "data_out/samples/wide_3lane_s5.jsonl.gz",
+   "n": 21605
+  },
+  {
+   "scenario": "wide_3lane",
+   "seed": 6,
+   "split": "heldout",
+   "samples": "data_out/samples/wide_3lane_s6.jsonl.gz",
+   "n": 19680
+  }
+ ]
+}

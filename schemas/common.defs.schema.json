@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sav2x:schema:common:2.0",
+  "title": "SA-V2X shared definitions (v2)",
+  "description": "Types shared by the extracted-message schemas and the vehicle-side sample schema. Times are UTC epoch milliseconds unless a name ends in _s (seconds relative to the sample's t0). Positions are meters in the intersection's local ENU frame (origin at the MAP refPoint, x east, y north). Headings follow J2735: degrees clockwise from north, [0, 360).",
+  "$defs": {
+    "epoch_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "heading_deg": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 360
+    },
+    "xy": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "approach": {
+      "enum": [
+        "N",
+        "E",
+        "S",
+        "W"
+      ]
+    },
+    "maneuver": {
+      "enum": [
+        "left",
+        "straight",
+        "right"
+      ]
+    },
+    "interval_s": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "[enter_s, exit_s] relative to t0, or null if it does not happen within the label horizon."
+    },
+    "movement_phase_state": {
+      "enum": [
+        "unavailable",
+        "dark",
+        "stop-Then-Proceed",
+        "stop-And-Remain",
+        "pre-Movement",
+        "permissive-Movement-Allowed",
+        "protected-Movement-Allowed",
+        "permissive-clearance",
+        "protected-clearance",
+        "caution-Conflicting-Traffic"
+      ],
+      "description": "J2735 MovementPhaseState. Pedestrian groups: protected-Movement-Allowed = WALK, permissive-clearance = flashing DON'T WALK, stop-And-Remain = DON'T WALK."
+    },
+    "ego_hist_row": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "prefixItems": [
+        {
+          "type": "number",
+          "description": "x_m (BSM position, local frame)"
+        },
+        {
+          "type": "number",
+          "description": "y_m"
+        },
+        {
+          "type": "number",
+          "minimum": 0,
+          "description": "speed_mps (BSM speed)"
+        },
+        {
+          "type": "number",
+          "description": "heading_deg (BSM heading)"
+        },
+        {
+          "type": "number",
+          "description": "accel_long_mps2 (BSM accelSet.long)"
+        },
+        {
+          "type": "number",
+          "description": "yaw_rate_dps (BSM accelSet.yaw)"
+        },
+        {
+          "enum": [
+            0,
+            1
+          ],
+          "description": "brake_applied (BSM brakes)"
+        },
+        {
+          "enum": [
+            0,
+            1
+          ],
+          "description": "left_turn signal (Part II ExteriorLights)"
+        },
+        {
+          "enum": [
+            0,
+            1
+          ],
+          "description": "right_turn signal"
+        },
+        {
+          "type": "number",
+          "description": "path_radius_m (Part II PathPrediction.radiusOfCurve; 3276.7 = straight)"
+        },
+        {
+          "type": "number",
+          "minimum": 0,
+          "description": "pos_acc_m (BSM PositionalAccuracy.semiMajor)"
+        },
+        {
+          "enum": [
+            0,
+            1
+          ],
+          "description": "valid"
+        }
+      ],
+      "description": "One 10 Hz step of the ego's own BSM data at t0 - (n_hist-1-k)*dt. Field order is the sample's ego.hist_fields."
+    },
+    "fut_row": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {
+          "type": "number",
+          "description": "x_m"
+        },
+        {
+          "type": "number",
+          "description": "y_m"
+        },
+        {
+          "type": "number",
+          "minimum": 0,
+          "description": "speed_mps"
+        },
+        {
+          "enum": [
+            0,
+            1
+          ],
+          "description": "valid"
+        }
+      ],
+      "description": "Label: ego position (vehicle center) at t0 + k*dt. Sim: ground truth. Field: the ego's own later BSM positions."
+    },
+    "signal_group_state": {
+      "type": "object",
+      "properties": {
+        "signal_group": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "kind": {
+          "enum": [
+            "vehicle",
+            "pedestrian"
+          ]
+        },
+        "state": {
+          "$ref": "#/$defs/movement_phase_state"
+        },
+        "min_end_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "minEndTime relative to t0 (mandatory in J2735)."
+        },
+        "likely_end_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "likelyTime relative to t0; null if not sent."
+        },
+        "max_end_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "maxEndTime relative to t0; null if not sent."
+        },
+        "conf_p": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "TimeIntervalConfidence decoded to a probability."
+        },
+        "elapsed_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Time in the current state."
+        },
+        "timing_valid": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "signal_group",
+        "kind",
+        "state",
+        "min_end_s",
+        "likely_end_s",
+        "max_end_s",
+        "conf_p"
+      ]
+    },
+    "crosswalk_label": {
+      "type": "object",
+      "properties": {
+        "inside_at_t0": {
+          "type": "boolean"
+        },
+        "entry_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Time until the ego's footprint first overlaps the target crosswalk; null if not within the observed window."
+        },
+        "exit_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "entry_censored": {
+          "type": "boolean",
+          "description": "Observation ended before the label horizon without an entry."
+        },
+        "exit_censored": {
+          "type": "boolean"
+        },
+        "censor_s": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Length of the observed label window."
+        }
+      },
+      "required": [
+        "inside_at_t0",
+        "entry_s",
+        "exit_s",
+        "entry_censored",
+        "exit_censored",
+        "censor_s"
+      ]
+    },
+    "agent_type": {
+      "enum": [
+        "vehicle",
+        "vru",
+        "animal",
+        "unknown"
+      ],
+      "description": "J3224 ObjectType."
+    }
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sav2x:schema:sdsm:2.0",
+  "title": "Extracted SAE J3224 Sensor Data Sharing Message (v2)",
+  "description": "One decoded SDSM, normalized to SI units and the local frame. Keep the raw UPER payload separately; this record is what the sample builder reads. Wire-to-field conversions follow J3224/J2735: offsets are ObjectDistance (0.1 m LSB) from refPos, speed is Speed (0.02 m/s), heading is Heading (0.0125 deg), measurementTime is MeasurementTimeOffset (ms, relative to sDSMTimeStamp). The vehicle-side predictor uses only objects with obj_type 'vru', counted in the MAP's pedestrian presence zones; the simulation emulator writes VRU objects only.",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "sav2x.sdsm/2.0"
+    },
+    "rsu_id": {
+      "type": "string"
+    },
+    "intersection_id": {
+      "type": "integer"
+    },
+    "msg_cnt": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 127
+    },
+    "source_id": {
+      "type": "string",
+      "description": "J3224 sourceID (TemporaryID, 4 octets hex)."
+    },
+    "equipment_type": {
+      "enum": [
+        "unknown",
+        "rsu",
+        "obu",
+        "vru"
+      ]
+    },
+    "sdsm_ts_ms": {
+      "$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms",
+      "description": "sDSMTimeStamp (DDateTime) as epoch ms."
+    },
+    "t_rx_ms": {
+      "$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms",
+      "description": "Receive time at the logging host (field logs). Optional in sim, where reception is applied per receiver later."
+    },
+    "ref": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lon": {
+          "type": "number"
+        },
+        "x_m": {
+          "type": "number"
+        },
+        "y_m": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "description": "refPos (Position3D) and its location in the local frame."
+    },
+    "ref_pos_xy_conf_m": {
+      "type": "number",
+      "minimum": 0
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "obj_type": {
+            "$ref": "urn:sav2x:schema:common:2.0#/$defs/agent_type"
+          },
+          "obj_type_cfd": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 101,
+            "description": "ClassificationConfidence (percent)."
+          },
+          "object_id": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535,
+            "description": "Sender-local temporary ObjectID; changes when the sender's tracker re-initializes."
+          },
+          "measurement_time_ms": {
+            "type": "integer",
+            "minimum": -1500,
+            "maximum": 1500,
+            "description": "Offset of the measurement from sDSMTimeStamp; t_obs = sdsm_ts_ms + measurement_time_ms."
+          },
+          "time_confidence": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 39
+          },
+          "offset_x_m": {
+            "type": "number",
+            "minimum": -3276.7,
+            "maximum": 3276.7
+          },
+          "offset_y_m": {
+            "type": "number",
+            "minimum": -3276.7,
+            "maximum": 3276.7
+          },
+          "offset_z_m": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "pos_conf_m": {
+            "type": "number",
+            "minimum": 0,
+            "description": "PositionConfidenceSet decoded to a 95% radius."
+          },
+          "speed_mps": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 163.82
+          },
+          "speed_conf_mps": {
+            "type": "number",
+            "minimum": 0
+          },
+          "heading_deg": {
+            "$ref": "urn:sav2x:schema:common:2.0#/$defs/heading_deg"
+          },
+          "heading_conf_deg": {
+            "type": "number",
+            "minimum": 0
+          },
+          "accel_long_mps2": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "accel4way.long (optional in J3224)."
+          },
+          "yaw_rate_dps": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "accel4way.yaw (optional)."
+          },
+          "veh": {
+            "type": "object",
+            "properties": {
+              "length_m": {
+                "type": "number"
+              },
+              "width_m": {
+                "type": "number"
+              },
+              "height_m": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "vehicle_class": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "lights": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "description": "DetectedVehicleData (optional)."
+          },
+          "vru": {
+            "type": "object",
+            "properties": {
+              "basic_type": {
+                "type": "string",
+                "description": "PersonalDeviceUserType, e.g. aPEDESTRIAN."
+              },
+              "radius_m": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "description": "DetectedVRUData (optional)."
+          },
+          "truth_id": {
+            "type": "string",
+            "description": "SIM ONLY: simulated identity, or 'false_positive' for emulated lidar clutter. Absent in field data."
+          }
+        },
+        "required": [
+          "obj_type",
+          "object_id",
+          "measurement_time_ms",
+          "offset_x_m",
+          "offset_y_m",
+          "pos_conf_m",
+          "speed_mps",
+          "heading_deg"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "rsu_id",
+    "intersection_id",
+    "msg_cnt",
+    "sdsm_ts_ms",
+    "ref",
+    "objects"
+  ]
+}

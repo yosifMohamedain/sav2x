@@ -1,0 +1,11 @@
+{
+ "samples": 3827,
+ "case": "vehicle",
+ "assoc": "estimated",
+ "association_quality": {
+  "purity": 0.9833694185062525,
+  "fragmentations": 452,
+  "n_tracks": 1799,
+  "n_truth": 1402
+ }
+}

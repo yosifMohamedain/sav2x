@@ -1,0 +1,9 @@
+eclipse-sumo>=1.20
+traci
+sumolib
+numpy
+scipy
+shapely>=2.0
+jsonschema>=4.18
+scikit-learn
+torch>=2.2

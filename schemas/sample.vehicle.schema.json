@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sav2x:schema:sample.vehicle:2.0",
+  "title": "SA-V2X vehicle-side training sample (v2)",
+  "description": "One decision time t0 on one connected vehicle (the ego). Inputs follow the vehicle-side design: ego kinematics from its own BSM data; candidate routes and zones from MAP; phase timing from received SPaT; pedestrian presence only, counted per zone from received SDSM VRU objects; optionally the nearest connected vehicle ahead from received BSMs. Everything under 'labels' and 'signal_truth' is a training target or analysis field and never a model input. One JSON object per line in .jsonl.gz.",
+  "type": "object",
+  "properties": {
+    "schema": {"const": "sav2x.sample.vehicle/2.0"},
+    "sample_id": {"type": "string"},
+    "origin": {"enum": ["sim", "field"]},
+    "scenario": {"type": "string", "description": "Scenario name (sim) or site/session tag (field)."},
+    "run_id": {"type": "string", "description": "Recording or simulation run. Split train/val/test by run, never by sample."},
+    "seed": {"type": ["integer", "null"]},
+    "intersection_id": {"type": "integer"},
+    "map_version": {"type": "string"},
+    "target_crosswalk_id": {"type": "string"},
+    "target_signal_group": {"type": "integer"},
+    "crosswalk_length_m": {"type": "number"},
+    "t0_ms": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/epoch_ms"},
+    "dt_ms": {"const": 100},
+    "n_hist": {"type": "integer", "minimum": 1},
+    "n_fut": {"type": "integer", "minimum": 1},
+    "label_horizon_s": {"type": "number", "exclusiveMinimum": 0},
+    "bin_s": {"type": "number", "exclusiveMinimum": 0},
+    "ego": {
+      "type": "object",
+      "properties": {
+        "temp_id": {"type": "string", "description": "The ego's current BSM TemporaryID."},
+        "length_m": {"type": "number", "minimum": 0},
+        "width_m": {"type": "number", "minimum": 0},
+        "hist_fields": {"type": "array", "items": {"type": "string"}, "minItems": 12, "maxItems": 12},
+        "hist": {"type": "array", "items": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/ego_hist_row"}, "minItems": 1},
+        "map_match": {
+          "type": "object",
+          "properties": {
+            "lane_id": {"type": "string", "description": "MAP lane id, or connection id when inside the box."},
+            "role": {"enum": ["ingress", "connector"]},
+            "approach": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/approach"},
+            "s_m": {"type": "number"},
+            "lat_m": {"type": "number", "minimum": 0},
+            "dist_to_stopline_m": {"type": ["number", "null"], "description": "Ingress lanes only."}
+          },
+          "required": ["lane_id", "role", "approach", "s_m", "lat_m", "dist_to_stopline_m"],
+          "description": "Map-matching of the ego's latest BSM position and heading. Derived input."
+        }
+      },
+      "required": ["temp_id", "length_m", "width_m", "hist_fields", "hist", "map_match"]
+    },
+    "routes": {
+      "type": "array", "minItems": 1, "maxItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "maneuver": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/maneuver"},
+          "connection_id": {"type": "string"},
+          "signal_group": {"type": "integer"},
+          "lane_change": {"type": "boolean", "description": "The maneuver is served by a different lane than the ego's current one."},
+          "crosses_target": {"type": "boolean"},
+          "zones": {"type": "array", "items": {"enum": ["inbound", "outbound"]}},
+          "s_stopline_m": {"type": ["number", "null"], "description": "Distance along the path to the stop line; null when already past it."},
+          "s_cw_entry_m": {"type": ["number", "null"], "description": "Distance along the path to the target crosswalk; null if the route does not cross it."},
+          "s_cw_exit_m": {"type": ["number", "null"]},
+          "path_spacing_m": {"type": "number", "exclusiveMinimum": 0},
+          "path": {"type": "array", "items": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/xy"}, "minItems": 2,
+                   "description": "Route centerline from the ego's projection forward (ingress lane, connector, egress lane), sampled every path_spacing_m, local frame."}
+        },
+        "required": ["maneuver", "connection_id", "signal_group", "lane_change", "crosses_target", "zones",
+                     "s_stopline_m", "s_cw_entry_m", "s_cw_exit_m", "path_spacing_m", "path"]
+      },
+      "description": "Candidate movements from the ego's approach (one per maneuver), or the single movement it is on inside the box."
+    },
+    "signals": {
+      "oneOf": [{"type": "null"}, {
+        "type": "object",
+        "properties": {
+          "spat_age_s": {"type": "number", "minimum": 0},
+          "groups": {"type": "array", "items": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/signal_group_state"},
+                     "description": "The routes' signal groups and the target crosswalk's pedestrian group, from the latest SPaT received by t0."},
+          "ped_bicycle_detect": {"type": ["boolean", "null"], "description": "SPaT ConnectionManeuverAssist.pedBicycleDetect for the target crosswalk."}
+        },
+        "required": ["spat_age_s", "groups"]
+      }],
+      "description": "Null if no SPaT has been received yet."
+    },
+    "ped_presence": {
+      "type": "object",
+      "properties": {
+        "zones": {"type": "array", "items": {"type": "string"}, "description": "MAP presence zones, inbound curb to outbound curb."},
+        "count": {"type": "array", "items": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+                  "description": "Per history step, the number of SDSM VRU objects in each zone (from the latest SDSM received by that step)."},
+        "valid": {"type": "array", "items": {"enum": [0, 1]}, "description": "Per history step: 1 if an SDSM no older than 0.25 s had been received."},
+        "sdsm_age_s": {"type": ["number", "null"], "description": "Age of the newest SDSM at t0."}
+      },
+      "required": ["zones", "count", "valid", "sdsm_age_s"],
+      "description": "The only SDSM-derived input: pedestrian presence by zone. No pedestrian tracks or IDs."
+    },
+    "leader_bsm": {
+      "type": "object",
+      "properties": {
+        "present": {"type": "boolean", "description": "A connected vehicle was received ahead in the ego's lane within 100 m."},
+        "gap_m": {"type": ["number", "null"]},
+        "speed_mps": {"type": ["number", "null"]},
+        "accel_long_mps2": {"type": ["number", "null"]},
+        "brake_applied": {"type": ["boolean", "null"]},
+        "age_s": {"type": ["number", "null"]}
+      },
+      "required": ["present"],
+      "description": "Optional context from other vehicles' BSMs."
+    },
+    "labels": {
+      "type": "object",
+      "properties": {
+        "truth_id": {"type": "string", "description": "SIM ONLY: vehicle identity, for grouping decisions into episodes."},
+        "fut": {"type": "array", "items": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/fut_row"}},
+        "maneuver": {"oneOf": [{"$ref": "urn:sav2x:schema:common:2.0#/$defs/maneuver"}, {"type": "null"}]},
+        "crosses_target": {"type": "boolean"},
+        "cw": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/crosswalk_label"},
+        "zones": {"type": "object",
+                  "properties": {"inbound": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/interval_s"},
+                                 "outbound": {"$ref": "urn:sav2x:schema:common:2.0#/$defs/interval_s"}},
+                  "required": ["inbound", "outbound"],
+                  "description": "Ego occupancy of each crosswalk half."},
+        "ped_occupancy": {
+          "type": "object",
+          "properties": {
+            "inbound": {"type": "array", "items": {"enum": [0, 1]}},
+            "outbound": {"type": "array", "items": {"enum": [0, 1]}},
+            "valid_bins": {"type": "integer", "minimum": 0}
+          },
+          "required": ["inbound", "outbound", "valid_bins"],
+          "description": "Per bin_s bin after t0: 1 if any pedestrian is on that half of the target crosswalk."
+        },
+        "conflict": {
+          "type": "object",
+          "properties": {
+            "label": {"type": "boolean", "description": "Ego and a pedestrian occupy the same crosswalk half within theta_s of each other."},
+            "theta_s": {"type": "number"},
+            "min_pet_s": {"type": ["number", "null"], "minimum": 0},
+            "zone": {"enum": ["inbound", "outbound", null]},
+            "ego_entry_s": {"type": ["number", "null"]},
+            "known": {"type": "boolean", "description": "False when the observation window ends before the ego leaves the crosswalk."}
+          },
+          "required": ["label", "theta_s", "min_pet_s", "known"]
+        }
+      },
+      "required": ["fut", "maneuver", "crosses_target", "cw", "zones", "ped_occupancy", "conflict"]
+    },
+    "signal_truth": {
+      "type": "array",
+      "items": {"type": "object",
+                "properties": {"signal_group": {"type": "integer"}, "next_change_s": {"type": "number"},
+                               "next_state": {"oneOf": [{"$ref": "urn:sav2x:schema:common:2.0#/$defs/movement_phase_state"}, {"type": "null"}]}},
+                "required": ["signal_group", "next_change_s"]},
+      "description": "Realized next change of the sample's signal groups. Analysis and oracle ablation only."
+    }
+  },
+  "required": ["schema", "sample_id", "origin", "run_id", "intersection_id", "map_version", "target_crosswalk_id",
+               "target_signal_group", "t0_ms", "dt_ms", "n_hist", "n_fut", "label_horizon_s", "bin_s",
+               "ego", "routes", "signals", "ped_presence", "labels"]
+}
